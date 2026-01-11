@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>つなげてちょろり</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for handwriting style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <!-- Matter.js Physics Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="ui-layer">
+            <div id="score-board">
+                <span>スコア: </span><span id="score">0</span>
+            </div>
+            <div id="timer-board">
+                <span>残り時間: </span><span id="timer">60</span>
+            </div>
+        </div>
+        <div id="combo-display" class="hidden">0 コンボ</div>
+        <div id="start-screen" class="overlay">
+            <img src="assets/rogo.png" alt="つなげてちょろり" id="game-logo">
+            <p>同じキャラクターをなぞってつなげよう！</p>
+            <div class="characters-preview">
+                <img src="assets/chorori.png" alt="Chorori">
+                <img src="assets/chamaru.png" alt="Chamaru">
+                <img src="assets/mokorena.png" alt="Mokorena">
+                <img src="assets/marisuke.png" alt="Marisuke">
+            </div>
+            <button id="start-btn">スタート！</button>
+        </div>
+        <div id="result-screen" class="overlay hidden">
+            <h2>おしまい！</h2>
+            <p>あなたのスコア</p>
+            <div id="final-score">0</div>
+            <button id="restart-btn">もう一回あそぶ</button>
+        </div>
+
+        <!-- Canvas will be injected here by Matter.js or we create it -->
+        <canvas id="world"></canvas>
+
+        <div id="control-area">
+            <button id="shuffle-btn">
+                <img src="assets/kazaguruma.png" alt="Shuffle">
+            </button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>

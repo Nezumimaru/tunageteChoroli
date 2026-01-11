@@ -1,0 +1,343 @@
+:root {
+    --bg-color: #e0f7fa;
+    --dot-color: #b2ebf2;
+    --primary-text: #5d4037;
+    --paper-white: #fffcf5;
+    --accent-color: #ffcc80;
+    --btn-color: #ffab91;
+    --btn-hover: #ff8a65;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Mochiy Pop One', sans-serif;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(var(--dot-color) 20%, transparent 20%);
+    background-size: 20px 20px;
+    color: var(--primary-text);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 480px;
+    /* Mobile-like aspect ratio preferred, or full screen */
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* Flex column for layout */
+    justify-content: flex-start;
+    /* Align top */
+    align-items: center;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    flex: 1;
+    /* Fill remaining space */
+}
+
+#control-area {
+    width: 100%;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #fff;
+    z-index: 5;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 252, 245, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.3s;
+    text-align: center;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+    /* simple hide */
+}
+
+#game-logo {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(2px 2px 0px #fff);
+    animation: bounce 2s infinite;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #ef5350;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.characters-preview {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.characters-preview img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: bounce 2s infinite;
+}
+
+.characters-preview img:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.characters-preview img:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.characters-preview img:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+button {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.5rem;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    background: var(--btn-color);
+    color: white;
+    box-shadow: 0 4px 0 #cc5d41;
+    /* 3D effect */
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #cc5d41;
+}
+
+button:hover {
+    background: var(--btn-hover);
+}
+
+#ui-layer {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    /* Let clicks pass through to canvas */
+    z-index: 5;
+}
+
+#score-board,
+#timer-board {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#final-score {
+    font-size: 5rem;
+    font-weight: 900;
+    color: #ff7043;
+    margin: 20px 0;
+    /* Glitter Effect */
+    background: linear-gradient(45deg, #ff7043, #ffd54f, #ff7043);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 2s linear infinite;
+    text-shadow: 0 0 10px rgba(255, 167, 38, 0.5);
+}
+
+.boing {
+    animation: shine 2s linear infinite, boing 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes boing {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.5);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+#combo-display {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    /* Starting size, JS handles scaling */
+    font-weight: 900;
+
+    /* Gold Glitter Effect */
+    background: linear-gradient(45deg, #ffd700, #fffde7, #ffd700, #ffb300);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-gold 2s linear infinite, pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Stroke workaround for gradient text: simple text-stroke might get clipped by background-clip: text */
+    /* So we use a filter drop-shadow for outline effect or standard stroke */
+    -webkit-text-stroke: 0;
+    /* Clear stroke as it conflicts with gradient fill usually, or use filter */
+    filter: drop-shadow(0 0 2px #3e2723) drop-shadow(0 0 5px #ff6f00);
+
+    pointer-events: none;
+    z-index: 20;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    font-family: 'Mochiy Pop One', sans-serif;
+}
+
+@keyframes shine-gold {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.0);
+        opacity: 1;
+    }
+}
+
+#shuffle-btn {
+    position: static;
+    /* Reset absolute */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    padding: 0;
+    line-height: 70px;
+    background: #81d4fa;
+    box-shadow: 0 6px 0 #0288d1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #fff;
+    /* White rim */
+    overflow: hidden;
+    /* Clip image to circle */
+}
+
+#shuffle-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* or contain, depending on image */
+    display: block;
+}
+
+#shuffle-btn:active {
+    box-shadow: 0 0 0 #0288d1;
+    transform: translateY(4px);
+}
+
+.urgent-slow {
+    animation: pulse-border 1s infinite alternate;
+}
+
+.urgent-fast {
+    animation: pulse-border 0.2s infinite alternate;
+}
+
+@keyframes pulse-border {
+    from {
+        box-shadow: inset 0 0 0 rgba(255, 0, 0, 0);
+        border: 4px solid transparent;
+    }
+
+    to {
+        box-shadow: inset 0 0 80px rgba(255, 69, 0, 0.6);
+        border: 4px solid rgba(255, 69, 0, 0.8);
+    }
+}
